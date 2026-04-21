@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust</title>
+</head> -->
+<% layout("/layouts/boilerplate") -%>
+    <!-- <h3>All Listings</h3> -->
+    <!-- <form method="get" action="/listings/new">
+        <button>Create New Listing</button>
+    </form> -->
+<style>
+    #filters {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow-x: auto;
+    }
+
+    #filters::-webkit-scrollbar{
+        display: none;
+    }
+
+    .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter p {
+        font-size: 0.8rem;
+    }
+
+    .tax-info {
+        display: none;
+    }
+
+    .tax-toggle{
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: auto; /* Pushes the switch to the far right */
+    display: flex;
+    align-items: center; 
+    }
+</style>
+    <div id="filters">
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Routes</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Farms</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-regular fa-snowflake"></i></div>
+            <p>Arctic</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-house-flood-water"></i></div>
+            <p>Beach</p>
+        </div>
+        <!-- <div class="filter">
+            <div><i class="fa-brands fa-artstation"></i></div>
+            <p>Art & Culture</p>
+        </div> -->
+        <div class="filter">
+            <div><i class="fa-solid fa-utensils"></i></div>
+            <p>Services</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-sun-plant-wilt"></i></div>
+            <p>Island</p>
+        </div>
+        <!-- <div class="filter">
+            <div><i class="fa-solid fa-gem"></i></div>
+            <p>Luxury</p>
+        </div> -->
+        <!-- <div class="filter">
+            <div><i class="fa-solid fa-house-chimney-window"></i></div>
+            <p>Tiny Homes</p>
+        </div> -->
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for(let listing of allListings){ %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card col listing-card">
+        <img src="<%= listing.image.url || listing.image %>" 
+        class="card-img-top" 
+        alt="listing_image" 
+        style="height: 20rem;">
+        <div class="card-img-overlay">abc</div>
+    <div class="card-body">
+        <p class="card-text">
+            <b><%= listing.title %></b> <br>
+            &#8377; <%= listing.price?.toLocaleString("en-IN") %> / night
+            <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+        </p>
+    </div>
+</div>
+</a>
+<% } %>
+</div>
+
+<script>
+    let taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click", ()=>{
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            if(info.style.display !== "inline"){
+                info.style.display = "inline";
+            }else{
+                info.style.display = "none";
+            }
+        }
+    });
+</script>
+
+<!-- jo hamara filter hai woh jab screen choti ho tab collapse ho jae ya kam hi filters show kare -->
