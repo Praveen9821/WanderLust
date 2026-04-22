@@ -3,7 +3,7 @@ import opencage from "opencage-api-client";
 const OpenToken = process.env.OPENCAGE_API_KEY;
 
 const index = async (req,res)=>{
-    const allListings = await Listing.find({});
+    const allListings = await Listing.find({}).populate("owner");
     res.render("listings/index.ejs", {allListings});
 };
 
