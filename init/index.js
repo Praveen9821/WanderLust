@@ -6,7 +6,7 @@ import Listing from "../models/listing.js";
 main().then(()=>{
     console.log("connected to DB");
     initDB();
-}).catch(()=>{
+}).catch((err)=>{
     console.log(err);
 });
 
