@@ -1,6 +1,6 @@
 # 🌍 WanderLust – Full Stack Travel Listing Platform
 
-[![Live Demo](https://shields.io)](https://wanderlust-yywd.onrender.com)]
+Live Demo - https://wanderlust-yywd.onrender.com
 
 WanderLust is a full-stack web application designed to help users explore, create, and manage travel destinations. It provides a seamless experience for discovering places, sharing reviews, and visualizing locations through interactive maps.
 
