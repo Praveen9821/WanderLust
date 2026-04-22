@@ -104,9 +104,9 @@ body{
 
 /* Show Page */
 .show-img{
-    height:30vh !important;
-    width: 100% !important;
-    object-fit: contain !important;
+    height:30vh;
+    width: 100%;
+    object-fit: contain;
     border-radius: 1rem;
 }
 
