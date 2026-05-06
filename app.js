@@ -61,10 +61,6 @@ const sessionOptions = {
     },
 };
 
-app.get("/", (req,res)=>{
-    res.redirect("/listings");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -81,6 +77,10 @@ app.use((req, res, next)=>{
     res.locals.currUser = req.user;
     next();
 })
+
+app.get("/", (req,res)=>{
+    res.redirect("/listings");
+});
 
 // app.get("/demouser", async (req, res)=>{
 //     let fakeUser = new User({
@@ -102,7 +102,7 @@ app.all("/path", (req, res, next)=>{
 
 app.use((err, req, res, next)=>{
     let {statusCode=500, message="Something went wrong!"} = err;
-    res.status(statusCode).render("error.ejs", {err});
+    res.status(statusCode).render("error.ejs", {err, success: req.flash("success"), error: req.flash("error"), currUser: req.user});
     // res.status(statusCode).send(message);
 });
 
