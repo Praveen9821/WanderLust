@@ -16,7 +16,12 @@ import User from './models/user.js';
 import userRouter from './routes/user.js';
 
 const app = express();
-const port = process.env.PORT || 8080;
+if (process.env.NODE_ENV !== 'production') {
+    const port = process.env.PORT || 8080;
+    app.listen(port, () => {
+        console.log(`Server is listening on port ${port}`);
+    });
+}
 
 app.set("view engine", "ejs");
 app.set("views", path.join(import.meta.dirname, "views"));
