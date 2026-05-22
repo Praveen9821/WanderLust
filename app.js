@@ -27,6 +27,31 @@ app.use(express.static(path.join(import.meta.dirname, "/public")));
 
 const dbUrl = process.env.ATLASDB_URL;
 
+let isConnected = false;
+
+async function connectToDatabase() {
+  if (isConnected) {
+    console.log("Using existing database connection");
+    return;
+  }
+  console.log("Creating new database connection");
+  const db = await mongoose.connect(dbUrl, {
+    family: 4 // Keeps your IPv4 bypass fix active
+  });
+  isConnected = db.connections[0].readyState;
+  console.log("connected to DB");
+}
+
+app.use(async (req, res, next) => {
+  try {
+    await connectToDatabase();
+    next();
+  } catch (err) {
+    console.error("Database connection middleware crash:", err);
+    next(err);
+  }
+});
+
 main().then(()=>{
     console.log("connected to DB");
 }).catch((err)=>{
